@@ -1,0 +1,28 @@
+#0th based indexing
+
+class Solution 
+{
+public:
+    vector<int> generaterow(int row)
+    {
+        long long int ans=1;
+        vector<int> res;
+        res.push_back(1);
+        for(int column=1;column<row;column++)
+        {
+            ans=ans*(row-column);
+            ans=ans/(column);
+            res.push_back(ans);
+        }
+        return res;
+    }
+    vector<vector<int>> generate(int numRows) 
+    {
+        vector<vector<int>> final_ans;
+        for(int i=1;i<=numRows;i++)
+        {
+            final_ans.push_back(generaterow(i));
+        }
+        return final_ans;
+    }
+};

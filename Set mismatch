@@ -1,0 +1,35 @@
+class Solution 
+{
+public:
+    vector<int> findErrorNums(vector<int>& nums) 
+    {
+       sort(nums.begin() , nums.end());
+       int n=nums.size();
+       int org_sum=0;
+       int sum=0;
+       int x;
+       int t;
+       vector<int> res;
+       int r;
+       for(int i=0;i<nums.size();i++)
+       {
+           for(int j=i+1;j<nums.size();j++)
+           {
+               if(nums[i]==nums[j])
+               {
+                   res.push_back(nums[i]); //push duplicate number 
+                   r=nums[i];
+               }
+           }
+       }
+       for(int i=0;i<nums.size();i++)
+       {
+           sum=sum+nums[i];
+       }
+       x=sum-r; //array sum minus duplicate number
+       org_sum=(n*(n+1))/2; //sum from 1 to n
+       t=org_sum-x; //this will give us the missing number from array
+       res.push_back(t); //push missing number
+       return res;
+    }
+};

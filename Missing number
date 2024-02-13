@@ -1,35 +1,60 @@
-****Brute force(using Linear method)
+1. Brute force(using Linear method)
 
-int missingNumber(vector<int>&a, int N) 
-{
-    
-    for(int i=1;i<=N;i++)
-    {
-        int flag=0;
-        for(int j=0;j<N-1;j++)
-        {
-            if(a[j]==i)
-            {
-                flag=1;
-                break;
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        int i = 0;
+        for(int j = 0;j<n;j++){
+            if(nums[j]!=i){
+                return i;
             }
+            i++;
         }
-        if(flag==0)
-        {
+        return n;
+    }
+};
+
+2. Better approach(Using hash map)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int missingNumber(vector<int>&a, int N) {
+
+    int hash[N + 1] = {0}; //hash array
+
+    // storing the frequencies:
+    for (int i = 0; i < N - 1; i++)
+        hash[a[i]]++;
+
+    //checking the freqencies for numbers 1 to N:
+    for (int i = 1; i <= N; i++) {
+        if (hash[i] == 0) {
             return i;
         }
     }
+
+    // The following line will never execute.
+    // It is just to avoid warnings.
+    return -1;
 }
 
-***Optimized solution(using 1 loop)
+3. Optimized solution(using 1 loop)
 
-int missingNumber(vector<int>&a, int N) 
+class Solution 
 {
-    int S1 = N*(N+1)/2;
-    int S2=0;
-    for(int i=0;i<N-1;i++)
+public:
+    int missingNumber(vector<int>& nums) 
     {
-        S2=S2+a[i];
+       int n=nums.size();
+       int sum=n*(n+1)/2;
+       int a_sum=0;
+       for(int i=0;i<n;i++)
+       {
+           a_sum=a_sum+nums[i];
+       }
+       return sum-a_sum;
     }
-    return (S1-S2);
-}
+};

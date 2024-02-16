@@ -1,4 +1,4 @@
-1. Brute force(using Linear method)
+1. Brute force(using 2-pointer method)
 
 class Solution {
 public:
@@ -17,7 +17,42 @@ public:
 };
 
 
-2. Better approach(Using hash map)
+2.Brute force (Using a flag variable)
+#include <vector>
+
+class Solution {
+public:
+    int missingNumber(std::vector<int>& nums) {
+        int N = nums.size();
+
+        // Outer loop that runs from 0 to N (inclusive):
+        for (int i = 0; i <= N; i++) {
+
+            // flag variable to check if an element exists
+            int flag = 0;
+
+            // Search the element using linear search:
+            for (int j = 0; j < N; j++) {
+                if (nums[j] == i) {
+
+                    // i is present in the array:
+                    flag = 1;
+                    break;
+                }
+            }
+
+            // Check if the element is missing (flag == 0):
+            if (flag == 0) return i;
+        }
+
+        // The following line will never execute.
+        // It is just to avoid warnings.
+        return -1;
+    }
+};
+
+
+3. Better approach(Using hash map)
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -50,7 +85,7 @@ public:
 };
 
 
-3. Optimized solution(using 1 loop)
+4. Optimized solution(using 1 loop)
 
 class Solution 
 {

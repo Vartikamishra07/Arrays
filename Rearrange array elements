@@ -32,8 +32,10 @@ class Solution
     }
 };
 
-2.Better
 
+2.Better approach
+
+Using while loop:
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
@@ -44,8 +46,6 @@ public:
             else v2.push_back(nums[i]);
         }
         int ind1=0,ind2=0;
-        
-
         while(ind2<nums.size()/2){
             ans.push_back(v1[ind1]);
             ind1++;
@@ -56,7 +56,32 @@ public:
     }
 };
 
-3.Optimised(2 pointer)
+Using for loop:
+ vector<int> RearrangebySign(vector<int>A, int n){
+    
+  // Define 2 vectors, one for storing positive 
+  // and other for negative elements of the array.
+  vector<int> pos;
+  vector<int> neg;
+  
+  // Segregate the array into positives and negatives.
+  for(int i=0;i<n;i++){
+      
+      if(A[i]>0) pos.push_back(A[i]);
+      else neg.push_back(A[i]);
+  }
+  
+  // Positives on even indices, negatives on odd.
+  for(int i=0;i<n/2;i++){
+      
+      A[2*i] = pos[i];
+      A[2*i+1] = neg[i];
+  }
+  return A;
+}
+
+
+3.Optimised approach(2 pointer)
 
 class Solution 
 {

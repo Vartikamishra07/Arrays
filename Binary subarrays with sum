@@ -1,0 +1,51 @@
+1. Brute approach
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int res = 0;
+        for (int start = 0; start < nums.size(); ++start) {
+            int sum = 0;
+            for (int end = start; end < nums.size(); ++end) {
+                sum += nums[end];
+                if (sum == goal)
+                    res++;
+            }
+        }
+        return res;
+    }
+};
+
+2. Optimal approach
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) 
+    {
+        unordered_map<int, int>mp;
+        int count=0;
+        int sum=0;
+        mp[0]=1;
+        for(auto num:nums)
+        {
+           sum=sum+num;
+           if(mp.find(sum-goal)!=mp.end())
+           {
+              count=count+mp[sum-goal];
+           }
+           mp[sum]++;
+        }
+        return count;
+    }
+};
+
+
+

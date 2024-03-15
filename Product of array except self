@@ -39,5 +39,23 @@ int main()
     return 0;
 }
 
-2.Optimal approach
+2.Better approach
 
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans(n);
+        int pro = 1;
+        for(int i : nums) {
+            pro *= i;
+        }
+        
+        for(int i = 0; i < n; i++) {
+            ans[i] = pro / nums[i];
+        }
+        return ans;
+    }
+};
+
+3.Optimal approach

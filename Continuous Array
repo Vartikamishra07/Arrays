@@ -1,0 +1,120 @@
+1. Brute approach(Using 3 loops)
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution 
+{
+public:
+    int findMaxLength(vector<int>& nums) 
+    {
+        int maxi=0;
+        int n=nums.size();
+        int n_zero=0;
+        int n_one=0;
+        for(int i=0;i<nums.size();i++)
+        {
+           for(int j=i;j<n;j++)
+           {
+              n_zero=0;
+              n_one=0;
+              for(int k=i;k<=j;k++)
+              {
+                 if(nums[k]==0) 
+                 {
+                     n_zero++;
+                 }
+                 else
+                 {
+                    n_one++;
+                 }
+              }
+              if(n_zero==n_one )
+              {
+                  maxi=max(maxi ,j-i+1);
+              }
+           } 
+        }   
+        return maxi;
+    }
+};
+
+int main()
+{
+    Solution s;
+    vector<int>nums={0,1,0};
+    int res=s.findMaxLength(nums);
+    cout<<res;
+}
+
+
+2. Better approach(Using 2 loops)
+
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution 
+{
+public:
+    int findMaxLength(vector<int>& nums) 
+    {
+        int maxi=0;
+        int n=nums.size();
+        int n_zero=0;
+        int n_one=0;
+        for(int i=0;i<nums.size();i++)
+        {
+          n_zero=0;
+           n_one=0;
+           for(int j=i;j<n;j++)
+           {
+                 if(nums[j]==0) 
+                 {
+                     n_zero++;
+                 }
+                 else
+                 {
+                    n_one++;
+                 }
+                  if(n_zero==n_one )
+                {
+                  maxi=max(maxi ,j-i+1);
+                }
+            }
+        }   
+        return maxi;
+    }
+};
+
+int main()
+{
+    Solution s;
+    vector<int>nums={0,1,0};
+    int res=s.findMaxLength(nums);
+    cout<<res;
+}
+
+3. Optimal approach(Hashmap)
+
+class Solution {
+public:
+    int findMaxLength(std::vector<int>& nums) {
+        int maxLength = 0;
+        int sum = 0;
+        std::unordered_map<int, int> map; // Store running sum and its index
+        map[0] = -1; // Handle the case when we find equal number of 0s and 1s from the beginning
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            sum += (nums[i] == 0 ? -1 : 1); // Convert 0s to -1 and 1s to 1
+            if (map.find(sum) != map.end()) {
+                maxLength = std::max(maxLength, i - map[sum]);
+            } else {
+                map[sum] = i;
+            }
+        }
+        
+        return maxLength;
+    }
+};

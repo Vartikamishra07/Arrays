@@ -1,0 +1,43 @@
+1.Optimal approach
+class Solution 
+{
+public:
+    int findDuplicate(vector<int>& nums) 
+    {
+       unordered_map<int,int>mp;
+       for(auto it:nums)
+       {
+          mp[it]++;
+       } 
+       for(auto it:mp)
+       {
+         if(it.second==2 || it.second>2)
+         {
+            return it.first;
+         }
+       }   
+       return -1;
+    }
+};
+
+2.Brute approach
+class Solution 
+{
+public:
+    int findDuplicate(vector<int>& nums) 
+    {
+       int n=nums.size();
+       sort(nums.begin() , nums.end());
+       for(int i=0;i<n;i++)
+       {
+          for(int j=i+1;j<n;j++)
+          {
+             if(nums[i]==nums[j])
+             {
+                return nums[i];
+             }
+          }
+       }
+       return -1;
+    }
+};

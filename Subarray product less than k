@@ -1,0 +1,28 @@
+class Solution 
+{
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) 
+    {
+        if (k <= 1) return 0; // Since k is strictly greater than 1, no subarray will have a product less than k if k <= 1
+    
+    int n = nums.size();
+    int count = 0;
+    int product = 1;
+    int left = 0;
+    
+    for (int right = 0; right < n; ++right) {
+        product *= nums[right];
+        
+        // Shrink the window from the left as long as product is greater than or equal to k
+        while (product >= k) {
+            product /= nums[left++];
+        }
+        
+        // Increment the count by the length of the current window
+        // Each subarray starting from left to right will be valid, so count += right - left + 1
+        count += right - left + 1;
+    }
+    
+    return count;
+    }
+};

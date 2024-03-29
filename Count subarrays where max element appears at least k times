@@ -1,0 +1,38 @@
+1.Brute approach(using 3 loops)
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int countSubarrays(vector<int>& nums, int k) {
+    int n = nums.size();
+    int result = 0;
+    
+    for (int i = 0; i < n; i++) {
+        int max_element = nums[i];
+        for (int j = i; j < n; j++) {
+            max_element = max(max_element, nums[j]);
+            int count_max = 0;
+            for (int x = i; x <= j; x++) {
+                if (nums[x] == max_element)
+                    count_max++;
+            }
+            if (count_max >= k)
+                result++;
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    vector<int> nums = {1,3,2,3,3};
+    int k = 2;
+    cout << "Number of subarrays where the maximum element appears at least " << k << " times: " << countSubarrays(nums, k) << endl;
+    return 0;
+}
+
+
+2. Optimal approach (Using sliding window approach)
+
+

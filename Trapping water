@@ -1,0 +1,63 @@
+1.Brute force(using 3 loops)
+
+class Solution 
+{
+public:
+    int trap(vector<int>& height) 
+    {
+       int n = height.size();
+    int trappedWater = 0;
+
+    for (int i = 1; i < n - 1; i++) {
+        int leftMax = 0, rightMax = 0;
+
+        // Find maximum height of walls to the left of the current position
+        for (int j = i; j >= 0; j--) {
+            leftMax = max(leftMax, height[j]);
+        }
+
+        // Find maximum height of walls to the right of the current position
+        for (int j = i; j < n; j++) {
+            rightMax = max(rightMax, height[j]);
+        }
+
+        // Calculate trapped rainwater at the current position
+        trappedWater += min(leftMax, rightMax) - height[i];
+    }
+
+    return trappedWater;
+    }
+};
+
+
+2.Better approach(using prefix sum)
+
+class Solution 
+{
+public:
+    int trap(vector<int>& height) 
+    {
+       int n = height.size();
+       if(n==0) return 0;
+       vector<int>leftMax(n);
+       vector<int>rightMax(n);
+       leftMax[0]=height[0];
+       for(int i=1;i<n;i++)
+       {
+        leftMax[i]=max(leftMax[i-1],height[i]);
+       }
+       rightMax[n-1]=height[n-1];
+       for(int i=n-2;i>=0;i--)
+       {
+        rightMax[i]=max(rightMax[i+1],height[i]);
+       }
+       int trappedWater=0;
+       for(int i=0;i<n;i++)
+       {
+         trappedWater+=min(leftMax[i],rightMax[i])-height[i];
+       }
+       return trappedWater;
+    }
+};
+
+

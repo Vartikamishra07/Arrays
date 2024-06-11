@@ -1,0 +1,49 @@
+#include <vector>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+class Solution 
+{
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) 
+    {
+        vector<int> res;
+        unordered_map<int, int> count;
+        vector<int> remaining;
+
+        // Count occurrences of each element in arr1
+        for(int num : arr1)
+        {
+            count[num]++;
+        }
+
+        // Add elements from arr2 to the result
+        for(int ele : arr2)
+        {
+            while(count[ele] > 0)
+            {
+                res.push_back(ele);
+                count[ele]--;
+            }
+        }
+
+        // Collect remaining elements that are not in arr2
+        for(auto& pair : count)
+        {
+            while(pair.second > 0)
+            {
+                remaining.push_back(pair.first);
+                pair.second--;
+            }
+        }
+
+        // Sort remaining elements
+        sort(remaining.begin(), remaining.end());
+
+        // Add sorted remaining elements to the result
+        res.insert(res.end(), remaining.begin(), remaining.end());
+
+        return res;
+    }
+};

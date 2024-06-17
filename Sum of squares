@@ -1,0 +1,17 @@
+class Solution 
+{
+public:
+    bool judgeSquareSum(int c) 
+    {
+        for(long a=0;a*a<=c;a++)
+        {
+            int b2=c-a*a;
+            int b=static_cast<long>(sqrt(b2));
+            if(b*b==b2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};

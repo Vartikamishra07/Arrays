@@ -1,0 +1,41 @@
+class Solution 
+{
+public:
+    int longestSubarray(vector<int>& nums, int limit) 
+    {
+        int size = 0;  // Initialize size to 0
+        for(int i = 0; i < nums.size(); i++)
+        {
+            for(int j = i; j < nums.size(); j++)
+            {
+                int min_val = nums[i];
+                int max_val = nums[i];
+                bool valid = true;
+
+                for(int k = i; k <= j; k++)
+                {
+                    if (nums[k] < min_val)
+                        min_val = nums[k];
+                    if (nums[k] > max_val)
+                        max_val = nums[k];
+
+                    if (max_val - min_val > limit)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (valid)
+                {
+                    size = max(size, j - i + 1);
+                }
+                else
+                {
+                    break; // No need to continue the inner loop if the subarray is invalid
+                }
+            }
+        }
+        return size;
+    }
+};

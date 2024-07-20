@@ -1,0 +1,43 @@
+class Solution 
+{
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix)
+    {
+        vector<int> res;
+        
+        // Iterate through each row
+        for (int i = 0; i < matrix.size(); ++i)
+        {
+            // Find the minimum element in the row
+            int minRowValue = matrix[i][0];
+            int minColIndex = 0;
+            for (int j = 1; j < matrix[i].size(); ++j)
+            {
+                if (matrix[i][j] < minRowValue)
+                {
+                    minRowValue = matrix[i][j];
+                    minColIndex = j;
+                }
+            }
+            
+            // Check if the found minimum is the maximum in its column
+            bool isMaxInCol = true;
+            for (int k = 0; k < matrix.size(); ++k)
+            {
+                if (matrix[k][minColIndex] > minRowValue)
+                {
+                    isMaxInCol = false;
+                    break;
+                }
+            }
+            
+            // If it is both minimum in its row and maximum in its column, it is a lucky number
+            if (isMaxInCol)
+            {
+                res.push_back(minRowValue);
+            }
+        }
+        
+        return res;
+    }
+};

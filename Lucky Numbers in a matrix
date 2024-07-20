@@ -27,7 +27,7 @@ public:
                 if (matrix[k][minColIndex] > minRowValue)
                 {
                     isMaxInCol = false;
-                    break;
+                    break;  //check for next row hence break
                 }
             }
             

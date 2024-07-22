@@ -1,0 +1,29 @@
+class Solution 
+{
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) 
+    {
+        // Create a vector of pairs to store distance and point
+        vector<pair<int, vector<int>>> distances;
+        
+        // Calculate the squared Euclidean distance for each point
+        for(const auto& point : points)
+        {
+            int distance = point[0] * point[0] + point[1] * point[1];
+            distances.push_back({distance, point});
+        }
+        
+        // Sort the vector based on distances
+        sort(distances.begin(), distances.end());
+        
+        // Extract the first k points
+        vector<vector<int>> res;
+        for(int i = 0; i < k; ++i)
+        {
+            res.push_back(distances[i].second);
+        }
+        
+        return res;
+    }
+};
+

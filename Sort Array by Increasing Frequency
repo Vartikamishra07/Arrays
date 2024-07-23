@@ -15,15 +15,24 @@ public:
         }
 
         // Sort the vector by frequency, and by value in descending order for equal frequencies
-        sort(freqVec.begin(), freqVec.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        //a.first and b.first represent the frequencies of the elements. This condition checks if the frequencies of the two pairs are equal.If the frequencies are equal, the function compares the second elements of the pairs (a.second and b.second), which represent the actual values. It returns true if a.second is greater than b.second, meaning that for pairs with the same frequency, the pair with the larger value will come first. 
+        //This ensures that the values are sorted in descending order when frequencies are equal.
+        //If the frequencies are not equal, the function returns true if a.first is less than b.first, meaning that pairs with smaller frequencies will come before pairs with larger frequencies. This ensures that the pairs are sorted in ascending order by frequency.
+      
+         sort(freqVec.begin(), freqVec.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
             if (a.first == b.first)
                 return a.second > b.second;
             return a.first < b.first;
         });
 
-        // Construct the result vector
+        // Construct the result vector A range-based for loop is used to iterate over each entry in the sorted vector freqVec. 
+        //Each entry is a pair<int, int> where entry.first represents the frequency and entry.second represents the value.
+        // res.end(): The position where the new elements will be inserted, which is at the end of the vector res.
+       //entry.first: The number of times the value should be inserted. This is the frequency of the value.
+       //entry.second: The value to be inserted.
+
         vector<int> res;
-        for (const auto& entry : freqVec) {
+        for (const auto& entry : freqVec) {   
             res.insert(res.end(), entry.first, entry.second);
         }
 

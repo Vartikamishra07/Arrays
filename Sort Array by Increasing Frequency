@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> frequencySort(vector<int>& nums) {
+        unordered_map<int, int> freq;
+        vector<pair<int, int>> freqVec;
+        
+        // Count the frequency of each number
+        for (int num : nums) {
+            freq[num]++;
+        }
+
+        // Move frequency data to a vector of pairs
+        for (const auto& entry : freq) {
+            freqVec.push_back({entry.second, entry.first});
+        }
+
+        // Sort the vector by frequency, and by value in descending order for equal frequencies
+        sort(freqVec.begin(), freqVec.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+            if (a.first == b.first)
+                return a.second > b.second;
+            return a.first < b.first;
+        });
+
+        // Construct the result vector
+        vector<int> res;
+        for (const auto& entry : freqVec) {
+            res.insert(res.end(), entry.first, entry.second);
+        }
+
+        return res;
+    }
+};

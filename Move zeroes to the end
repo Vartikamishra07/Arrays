@@ -1,32 +1,4 @@
-1. Optimal approach(Using 2 pointers)
-#include <bits/stdc++.h>
-using namespace std;
-
-vector<int> moveZeros(int n, vector<int> a) {
-    int j = -1;
-    //place the pointer j:
-    for (int i = 0; i < n; i++) {
-        if (a[i] == 0) {
-            j = i;
-            break;
-        }
-    }
-
-    //no non-zero elements:
-    if (j == -1) return a;
-
-    //Move the pointers i and j
-    //and swap accordingly:
-    for (int i = j + 1; i < n; i++) {
-        if (a[i] != 0) {
-            swap(a[i], a[j]);
-            j++;
-        }
-    }
-    return a;
-}
- 
-2. Brute approach (Using an extra vector so more space complexity)
+1. Brute approach (Using an extra vector so more space complexity)
 
 class Solution 
 {
@@ -53,3 +25,32 @@ public:
         }
     }
 };
+
+
+2. Optimal approach(Using 2 pointers)
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> moveZeros(int n, vector<int> a) {
+    int j = -1;
+    //place the pointer j:
+    for (int i = 0; i < n; i++) {
+        if (a[i] == 0) {
+            j = i;
+            break;
+        }
+    }
+
+    //no non-zero elements:
+    if (j == -1) return a;
+
+    //Move the pointers i and j
+    //and swap accordingly:
+    for (int i = j + 1; i < n; i++) {
+        if (a[i] != 0) {
+            swap(a[i], a[j]);
+            j++;
+        }
+    }
+    return a;
+}

@@ -50,7 +50,7 @@ class Solution
 };
 
 
-3.Optimal approach
+3.Optimal approach - Prefix Sum
 
 class Solution 
 { 

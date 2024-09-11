@@ -2,7 +2,7 @@
 
 int maxProductSubArray(vector<int>& nums) {
     int result = INT_MIN;
-    for(int i=0;i<nums.size()-1;i++) {
+    for(int i=0;i<nums.size();i++) {
         for(int j=i;j<nums.size();j++) {
             int prod = 1;
             for(int k=i;k<=j;k++) 
@@ -16,17 +16,26 @@ int maxProductSubArray(vector<int>& nums) {
 
 2.Better approach
 
-int maxProductSubArray(vector<int>& nums) {
-    int result = nums[0];
-    for(int i=0;i<nums.size()-1;i++) {
-        int p = nums[i];
-        for(int j=i;j<nums.size();j++) {
-            p *= nums[j];
-           result = max(result,p);
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int result = nums[0];
+        
+        // Outer loop to iterate over the starting index of subarrays
+        for (int i = 0; i < nums.size(); i++) {
+            int p = 1; // Initialize the product to 1
+            
+            // Inner loop to iterate over subarrays starting from index 'i'
+            for (int j = i; j < nums.size(); j++) {
+                p *= nums[j]; // Multiply with the current element
+                result = max(result, p); // Update the result with the maximum product found so far
+            }
         }
+        
+        return result;
     }
-    return result;
-}
+};
+
 
 3.Optimal appraoch
 

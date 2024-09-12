@@ -37,6 +37,8 @@ public:
     }
 };
 
+or
+
 class Solution 
 {
 public:
@@ -47,7 +49,7 @@ public:
         {
             for(int j=i+1;j<n;j++)
             {
-                swap(matrix[i][j] , matrix[j][i]);
+                swap(matrix[i][j] , matrix[j][i]);  //transpose the matrix
             }
         }
         for(int i=0;i<n;i++)
@@ -55,7 +57,7 @@ public:
            int p1=0 , p2=n-1;
            while(p1<p2)
            {
-              swap(matrix[i][p1] , matrix[i][p2]);
+              swap(matrix[i][p1] , matrix[i][p2]);  //logic of reversing the elements of each row 
               p1++;
               p2--;
            }
